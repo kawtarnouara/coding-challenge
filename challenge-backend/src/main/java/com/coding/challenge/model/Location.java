@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 public class Location {
 	private String type;
-	private String[] coordinates = new String[2];
+	private double[] coordinates = new double[2];
 	
 	
-	public Location(String type, String[] coordinates) {
+	public Location(String type, double[] coordinates) {
 		super();
 		this.type = type;
 		this.coordinates = coordinates;
@@ -24,12 +24,12 @@ public class Location {
 	}
 
 
-	public String[] getCoordinates() {
+	public double[] getCoordinates() {
 		return coordinates;
 	}
 
 
-	public void setCoordinates(String[] coordinates) {
+	public void setCoordinates(double[] coordinates) {
 		this.coordinates = coordinates;
 	}
 

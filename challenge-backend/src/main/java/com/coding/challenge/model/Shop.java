@@ -12,7 +12,29 @@ public class Shop {
 	private String email;
 	private String city;
 	private Location location;
+	private double distance;
 	
+	
+	
+	public Shop() {
+		super();
+	}
+	public Shop(String id, String picture, String name, String email, String city, Location location, double distance) {
+		super();
+		this.id = id;
+		this.picture = picture;
+		this.name = name;
+		this.email = email;
+		this.city = city;
+		this.location = location;
+		this.distance = distance;
+	}
+	public double getDistance() {
+		return distance;
+	}
+	public void setDistance(double distance) {
+		this.distance = distance;
+	}
 	public Shop(String id, String picture, String name, String email, String city, Location location) {
 		super();
 		this.id = id;

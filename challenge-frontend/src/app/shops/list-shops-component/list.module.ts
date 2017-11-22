@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ShopService } from '../services/shop.service';
 import { ListShopComponent } from './list.component';
-import {HttpClientModule} from '@angular/common/http';
-
+import { HttpClientModule } from "@angular/common/http";
 @NgModule({
     declarations: [
         ListShopComponent
