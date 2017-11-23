@@ -1,4 +1,4 @@
-package com.coding.challenge.service;
+package com.coding.challenge.shop.service;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -7,8 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.coding.challenge.model.Shop;
-import com.coding.challenge.repository.IShopRepository;
+import com.coding.challenge.shop.model.Shop;
+import com.coding.challenge.shop.repository.IShopRepository;
 
 @Service
 public class ShopService implements IShopService{

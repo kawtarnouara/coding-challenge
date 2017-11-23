@@ -1,4 +1,4 @@
-package com.coding.challenge.model;
+package com.coding.challenge.shop.model;
 
 import java.util.Arrays;
 

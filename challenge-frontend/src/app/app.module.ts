@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ShopsModule } from './shops/shops.module';
 import { AppRoutingModule } from './app.routing.module';
 import { HttpClientModule } from "@angular/common/http";
+import { HomeModule } from "./home/home.module";
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { HttpClientModule } from "@angular/common/http";
     BrowserModule,
     HttpClientModule,
     ShopsModule,
+    HomeModule,
     AppRoutingModule
   ],
   providers: [],

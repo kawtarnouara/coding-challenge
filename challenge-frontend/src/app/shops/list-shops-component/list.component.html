@@ -3,7 +3,7 @@
             <p>Shop {{shop.id}}</p>
             <img src={{shop.picture}}/>
             <br/>
-            <button>Like</button>
+            <button type="button" (click)="like($event,shop.id)">Like</button>
             <button>Dislike</button>
 
 </span>

@@ -1,0 +1,4 @@
+<form #loginForm="ngForm" novalidate>
+E-mail <input type="text" name="email" [(ngModel)]="currentUser.email" #email="ngModel" required/>
+Password<input type="password" name="password"  [(ngModel)]="currentUser.password" #password="ngModel" required/>
+<button type="submit" (click)="login($event,currentUser.email,currentUser.password)" [disabled]="!loginForm.valid">Login</button>
