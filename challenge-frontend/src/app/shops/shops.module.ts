@@ -8,6 +8,7 @@ import { ShopService } from './services/shop.service';
 import { ShopsRoutingModule } from './shops-routing.module';
 import { ShopsComponent } from './shops.component';
 import { ListShopModule } from './list-shops-component/list.module';
+import { LikedShopModule } from './liked-shops-component/liked.module';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ListShopModule } from './list-shops-component/list.module';
         FormsModule,
         HttpModule,
         ShopsRoutingModule,
-        ListShopModule
+        ListShopModule,
+        LikedShopModule
 
     ],
     declarations: [

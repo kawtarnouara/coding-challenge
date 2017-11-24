@@ -38,9 +38,14 @@ public class UserController {
 		userService.create(user);
 	}
 	
-	@RequestMapping(value = "/users/{id}", method = RequestMethod.POST)
-	public   User updatedShop(@RequestBody User user) {		
-		return userService.update(user);
+	@RequestMapping(value = "/users/liked/{idShop}", method = RequestMethod.PUT)
+	public   User addLikedShop(@RequestBody User user,@PathVariable String idShop) {	
+		return userService.addPreferredShop(user,idShop);
+	}
+	
+	@RequestMapping(value = "/users/removeLiked/{idShop}", method = RequestMethod.PUT)
+	public   User removeLikedShop(@RequestBody User user,@PathVariable String idShop) {	
+		return userService.removeLikedShop(user,idShop);
 	}
 	
 	@RequestMapping(value = "/users/email", method = RequestMethod.GET)
@@ -53,8 +58,5 @@ public class UserController {
 			userService.delete(id);		
 	}
 	
-	@RequestMapping(value = "/users/preferredShops", method = RequestMethod.GET)
-	public void addPreferredShop (@RequestParam String email,@RequestParam String idShop) {
-		userService.addPreferredShop(email,idShop);
-	}
+	
 }

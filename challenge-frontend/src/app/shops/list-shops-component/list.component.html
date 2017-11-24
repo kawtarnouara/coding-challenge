@@ -1,9 +1,10 @@
-<span *ngFor="let shop of shops">
+<span *ngFor="let shop of shops ; let i = index">
+    <div *ngIf="!disliked[i]">
             <p>Shop {{shop.name}}</p>
             <p>Shop {{shop.id}}</p>
             <img src={{shop.picture}}/>
             <br/>
             <button type="button" (click)="like($event,shop.id)">Like</button>
-            <button>Dislike</button>
-
+            <button type="button" (click)="dislike($event,shop.id,i)">Dislike</button>
+    </div>
 </span>

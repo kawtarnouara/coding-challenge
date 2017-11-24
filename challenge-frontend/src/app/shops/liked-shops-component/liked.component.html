@@ -1,0 +1,8 @@
+<span *ngFor="let shop of shops">
+            <p>Shop {{shop.name}}</p>
+            <p>Shop {{shop.id}}</p>
+            <img src={{shop.picture}}/>
+            <br/>
+            <button type="button" (click)="remove($event,shop.id)">Remove</button>
+
+</span>

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.coding.challenge.shop.model.Shop;
@@ -47,18 +48,33 @@ public class UserService implements IUserService {
 		return repository.findByEmail(email).get(0);
 	}
 
-	public void addPreferredShop(String email, String idShop) {
-		User user=this.findByEmail(email);
+	public User addPreferredShop(User user,String idShop) {
+		 user = repository.findOne(user.getId());
 		Shop shop= shopRepository.findOne(idShop);
 		ArrayList<Shop> likedShops=user.getPreferedShops();
 		likedShops.add(shop);
 		user.setPreferedShops(likedShops);
-		this.update(user);	
+		return this.update(user);	
 	}
 
 	public void delete(String id) {
 		repository.delete(id);
 		
 	}
+
+	public User removeLikedShop(User user, String idShop) {
+		 user = repository.findOne(user.getId());
+			Shop shop= shopRepository.findOne(idShop);
+			ArrayList<Shop> likedShops=user.getPreferedShops();
+			for(int i=0;i<likedShops.size();i++) {
+				if(likedShops.get(i).getId().equals(idShop)) {
+					likedShops.remove(i);
+				}
+			}
+			user.setPreferedShops(likedShops);
+			return this.update(user);	
+	}
+
+	
 
 }

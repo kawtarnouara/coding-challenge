@@ -49,8 +49,13 @@ public class ShopController {
 		return found;		
 	}
 	
-	@RequestMapping(value = "/shops/location", method = RequestMethod.GET)
-	public ResponseEntity<List<Shop>> sortShops (@RequestParam 	String latitude ,@RequestParam String longitude) {
-		return ResponseEntity.ok(shopService.sortShops(Double.parseDouble(latitude), Double.parseDouble(longitude)));
+	@RequestMapping(value = "/shops/location/{idUser}", method = RequestMethod.GET)
+	public ResponseEntity<List<Shop>> sortShops (@RequestParam 	String latitude ,@RequestParam String longitude,@PathVariable String idUser) {
+		return ResponseEntity.ok(shopService.sortShops(Double.parseDouble(latitude), Double.parseDouble(longitude),idUser));
+	}
+	
+	@RequestMapping(value = "/shops/location/liked/{idUser}", method = RequestMethod.GET)
+	public ResponseEntity<List<Shop>> sortLikedShops (@RequestParam 	String latitude ,@RequestParam String longitude,@PathVariable String idUser) {
+		return ResponseEntity.ok(shopService.sortLikedShops(Double.parseDouble(latitude), Double.parseDouble(longitude),idUser));
 	}
 }
