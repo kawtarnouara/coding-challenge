@@ -36,11 +36,13 @@ export class ListShopComponent implements OnInit {
                         -6.84167,
                         33.81279
                     ]
-                }
+                },
+                'distance': 0,
         });
         this._shopService.getCurrentIpLocation().subscribe(result => {
             this.latitude = result.loc.split(',')[0];
             this.longitude = result.loc.split(',')[1];
+            console.log(this.latitude + " " + this.longitude);
             this.getSortedShops(this.latitude, this.longitude, this.currentUser.id);
         });
     }
@@ -69,9 +71,12 @@ export class ListShopComponent implements OnInit {
     }
 
     dislike($event, idShop, i) {
-        this.disliked[i] = true;
+       /* this.disliked[i] = true;
         setTimeout(function() {
             this.disliked[i] = false;
         }.bind(this), 7200000);
+        let date = new Date ();
+        date.setHours ( date.getHours() + 2 );
+        console.log(date.toISOString());*/
        }
 }

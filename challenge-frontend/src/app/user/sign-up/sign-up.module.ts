@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SignUpComponent } from './sign-up.component';
 import { HttpClientModule } from '@angular/common/http';
+import { UserService } from '../services/user.service';
 @NgModule({
     declarations: [
         SignUpComponent
@@ -16,7 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
         SignUpComponent
     ],
     providers: [
-        //ShopService
+        UserService
     ],
 
 })

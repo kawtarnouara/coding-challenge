@@ -44,6 +44,7 @@ export class ShopService {
     removeLikedShop(idShop , user): Observable<any> {
         return this._http.put(this.userUrl + '/removeLiked/' + idShop , user);
     }
+
     private handleError(error: Response) {
         console.error(error);
         return Observable.throw(error.json() || 'Server error');

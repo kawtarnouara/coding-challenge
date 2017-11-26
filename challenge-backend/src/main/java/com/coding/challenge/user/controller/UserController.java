@@ -34,8 +34,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/users", method = RequestMethod.POST)
-	public void createUser(@RequestBody User user) {
-		userService.create(user);
+	public User createUser(@RequestBody User user) {
+		System.out.println("here");
+		return userService.create(user);
 	}
 	
 	@RequestMapping(value = "/users/liked/{idShop}", method = RequestMethod.PUT)
@@ -51,6 +52,14 @@ public class UserController {
 	@RequestMapping(value = "/users/email", method = RequestMethod.GET)
 	public ResponseEntity<User> getUserByEmail (@RequestParam String email) {
 		return ResponseEntity.ok(userService.findByEmail(email));
+	}
+	
+	@RequestMapping(value = "/users/check", method = RequestMethod.GET)
+	public boolean checkUserByEmail (@RequestParam String email) {
+		if (userService.findByEmail(email)!=null)
+			return false;
+		else 
+			return true;
 	}
 	
 	@RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)

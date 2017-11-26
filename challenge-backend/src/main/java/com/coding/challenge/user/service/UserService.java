@@ -45,7 +45,10 @@ public class UserService implements IUserService {
 
 	@Override
 	public User findByEmail(String email) {
-		return repository.findByEmail(email).get(0);
+		if(repository.findByEmail(email).size()>0)
+			return repository.findByEmail(email).get(0);
+		else
+			return null;
 	}
 
 	public User addPreferredShop(User user,String idShop) {

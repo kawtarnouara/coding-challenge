@@ -1,5 +1,6 @@
 package com.coding.challenge.shop.service;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -77,7 +78,8 @@ public class ShopService implements IShopService{
 			shopLongitude=shops.get(i).getLocation().getCoordinates()[0];			
 			shopLatitude=shops.get(i).getLocation().getCoordinates()[1];
 			distance=this.distance(latitude, longitude, shopLatitude, shopLongitude);
-			shops.get(i).setDistance(distance);
+			shops.get(i).setDistance(distance*0.001);
+			this.update(shops.get(i));
 		}
 		
 		Collections.sort(shops, new Comparator<Shop>() {
