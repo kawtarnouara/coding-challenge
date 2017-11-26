@@ -6,10 +6,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.coding.challenge.shop.model.DislikedShop;
 import com.coding.challenge.shop.model.Shop;
 
 @Document(collection="users")
-public class User {
+public class User  {
 	@Id
 	private String id;
 	
@@ -17,7 +18,7 @@ public class User {
 	private String email;
 	private String password;
 	private ArrayList<Shop> preferedShops;
-	
+	private ArrayList<DislikedShop> dislikedShops;
 	
 	
 	public User( String email, String password) {
@@ -25,12 +26,14 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.preferedShops= new ArrayList<Shop>();
+		this.dislikedShops= new ArrayList<DislikedShop>();
 	}
 
 
 	public User() {
 		super();
 		this.preferedShops= new ArrayList<Shop>(); 
+		this.dislikedShops= new ArrayList<DislikedShop>();
 	}
 
 
@@ -40,6 +43,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.preferedShops= new ArrayList<Shop>();
+		this.dislikedShops= new ArrayList<DislikedShop>();
 	}
 
 
@@ -49,6 +53,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.preferedShops = prefered;
+		this.dislikedShops= new ArrayList<DislikedShop>();
 		
 	}
 
@@ -92,6 +97,27 @@ public class User {
 		this.preferedShops = preferedShops;
 	}
 
+
+
+	public ArrayList<DislikedShop> getDislikedShops() {
+		return dislikedShops;
+	}
+
+
+	public void setDislikedShops(ArrayList<DislikedShop> dislikedShops) {
+		this.dislikedShops = dislikedShops;
+	}
+
+
+	public User(String id, String email, String password, ArrayList<Shop> preferedShops,
+			ArrayList<DislikedShop> dislikedShops) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.password = password;
+		this.preferedShops = preferedShops;
+		this.dislikedShops = dislikedShops;
+	}
 
 
 	@Override

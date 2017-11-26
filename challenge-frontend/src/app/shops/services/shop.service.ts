@@ -30,6 +30,12 @@ export class ShopService {
         return this._http.put(this.userUrl + '/liked/' + idShop , user);
     }
 
+    addDislikedShop(user, idShop, deadline): Observable<any> {
+        let Params = new HttpParams();
+        Params = Params.append('deadline', deadline);
+        return this._http.put(this.userUrl + '/disliked/' + idShop , user,{ params: Params });
+    }
+
     getCurrentIpLocation(): Observable<any> {
         return this._http.get('http://ipinfo.io');
     }
@@ -41,6 +47,9 @@ export class ShopService {
         return this._http.get(this.apiUrl + '/location/liked/' + idUser, { params: Params });
     }
 
+    getDislikedShops(idUser): Observable<any> {
+        return this._http.get(this.userUrl + '/disliked/' + idUser);
+    }
     removeLikedShop(idShop , user): Observable<any> {
         return this._http.put(this.userUrl + '/removeLiked/' + idShop , user);
     }

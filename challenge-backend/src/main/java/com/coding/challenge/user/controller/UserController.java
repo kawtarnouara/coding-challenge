@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.coding.challenge.shop.model.DislikedShop;
 import com.coding.challenge.shop.model.Shop;
 import com.coding.challenge.user.model.User;
 import com.coding.challenge.user.service.UserService;
@@ -65,6 +66,16 @@ public class UserController {
 	@RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable String id) {
 			userService.delete(id);		
+	}
+	
+	@RequestMapping(value = "/users/disliked/{idShop}", method = RequestMethod.PUT)
+	public   User addDisLikedShop(@RequestBody User user,@PathVariable String idShop, @RequestParam String deadline) {	
+		return userService.addDislikedShop(user,idShop,deadline);
+	}
+	
+	@RequestMapping(value = "/users/disliked/{idUser}" , method = RequestMethod.GET)
+	public ResponseEntity<List<DislikedShop>> dislikedShops(@PathVariable String idUser) {
+		return ResponseEntity.ok(userService.getDislikedShops(idUser));
 	}
 	
 	

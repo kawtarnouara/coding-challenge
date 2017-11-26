@@ -1,13 +1,18 @@
+<h1 class="title"> Liked shops </h1>
 <div class="container">
         <div class="row justify-content-around">
-<div class="col-3"  *ngFor="let shop of shops">
-            <p>Shop {{shop.name}}</p>
-            <p>Shop {{shop.id}}</p>
-            <img src={{shop.picture}}/>
-            <br/>
-            <button type="button" (click)="remove($event,shop.id)">Remove</button>
-
-</div>
+                <div class="col-3" *ngFor="let shop of shops">
+                        <div class="border">
+                                <p>Shop {{shop.name}}</p>
+                                <p>Shop {{shop.id}}</p>
+                                <img src={{shop.picture}}/>
+                                <br/>
+                                <div class="buttons">
+                                        <button class="btn btn-danger btn-sm" type="button" (click)="remove($event,shop.id)">
+                                                        <i class="fa fa-times" style="padding-right: 4px;" aria-hidden="true"></i>Remove
+                                        </button>
+                                </div>
+                        </div>
+                </div>
         </div>
-    </div>
-        
+</div>

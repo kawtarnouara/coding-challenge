@@ -12,6 +12,10 @@ html, body{
 	background: #fff;
 	font-family: 'Open Sans', sans-serif;
 }
+.title{
+	color:#BBB0B0;
+	text-align: center;
+}
 body a {
 	text-decoration:none;
 	transition:0.5s all;

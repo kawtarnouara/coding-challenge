@@ -3,6 +3,7 @@ import { ShopService } from '../services/shop.service';
 import { Shop } from '../models/shop';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../../user/models/user';
+import { DislikedShop } from "../models/disliked-shop";
 
 @Component({
     selector: 'list',
@@ -14,12 +15,19 @@ export class ListShopComponent implements OnInit {
     latitude: string;
     likedShop: Shop;
     longitude: string;
-    disliked: boolean[]= [];
+    disShops: Shop[] = [];
+    dislikedShops: DislikedShop[] = [];
     currentUser: User = new User();
     constructor(private _shopService: ShopService) {
     }
 
     ngOnInit() {
+        var startDate = new Date();
+        // Do your operations
+        var endDate   = new Date('2017-11-16T00:00:00');
+        var seconds = (-endDate.getTime() + startDate.getTime()) / 1000;
+        console.log(seconds);
+        console.log(Math.trunc(22.45));
         this.currentUser.email = 'kawtar.nouara@gmail.com';
         this.currentUser.id = '56e352ef-85e8-40ba-a804-fa5bae06069d';
         this.currentUser.password = 'test';
@@ -50,9 +58,24 @@ export class ListShopComponent implements OnInit {
         this._shopService.getSortedShops(latitude, longitude, idUser)
             .subscribe(data => {
                 this.shops = data;
-                for (let j = 0 ; j < this.shops.length ; j++) {
-                    this.disliked[j] = false;
-                }
+                this._shopService.getDislikedShops(idUser).subscribe(dislikedShops => {
+                    this.dislikedShops = dislikedShops;
+                    for (let j = 0; j < this.dislikedShops.length; j++) {
+                       for (let k = 0 ; k < this.shops.length ; k++) {
+                          if (this.shops[k].id === this.dislikedShops[j].shop.id ) {
+                            this.disShops[k] = this.shops[k];
+                            this.shops.splice(k, 1);
+                            let startDate = new Date();
+                            let endDate = new Date(this.dislikedShops[j].deadline);
+                            let seconds = (endDate.getTime() - startDate.getTime()) / 1000;
+                            let milliseconds = Math.trunc(seconds) * 1000;
+                            setTimeout(function() {
+                                this.shops.splice(k, 0, this.disShops[k]);
+                            }.bind(this), milliseconds);
+                            }
+                        }
+                 }
+                 });
             });
     }
 
@@ -71,12 +94,8 @@ export class ListShopComponent implements OnInit {
     }
 
     dislike($event, idShop, i) {
-       /* this.disliked[i] = true;
-        setTimeout(function() {
-            this.disliked[i] = false;
-        }.bind(this), 7200000);
-        let date = new Date ();
+        const date = new Date ();
         date.setHours ( date.getHours() + 2 );
-        console.log(date.toISOString());*/
+         this._shopService.addDislikedShop(this.currentUser, idShop, date.toISOString()).subscribe();
        }
 }

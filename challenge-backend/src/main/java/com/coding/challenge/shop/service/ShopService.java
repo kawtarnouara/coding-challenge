@@ -8,6 +8,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.coding.challenge.shop.model.Shop;
@@ -102,5 +104,7 @@ public class ShopService implements IShopService{
 
 	    return dist;
 	    }
+	
+	
 
 }

@@ -58,4 +58,6 @@ public class ShopController {
 	public ResponseEntity<List<Shop>> sortLikedShops (@RequestParam 	String latitude ,@RequestParam String longitude,@PathVariable String idUser) {
 		return ResponseEntity.ok(shopService.sortLikedShops(Double.parseDouble(latitude), Double.parseDouble(longitude),idUser));
 	}
+	
+	
 }
