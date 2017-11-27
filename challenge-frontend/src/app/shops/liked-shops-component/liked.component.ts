@@ -3,6 +3,7 @@ import { ShopService } from '../services/shop.service';
 import { Shop } from '../models/shop';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../../user/models/user';
+import { UserService } from "../../user/services/user.service";
 
 @Component({
     selector: 'liked',
@@ -15,7 +16,7 @@ export class LikedShopComponent implements OnInit {
     likedShop: Shop;
     longitude: string;
     currentUser: User = new User();
-    constructor(private _shopService: ShopService) {
+    constructor(private _shopService: ShopService , private _userService: UserService) {
     }
 
     ngOnInit() {
@@ -46,5 +47,7 @@ export class LikedShopComponent implements OnInit {
             }
         });
     }
+
+   
 
 }

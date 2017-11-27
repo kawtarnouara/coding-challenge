@@ -4,9 +4,9 @@ import { AppComponent } from './app.component';
 import { ShopsModule } from './shops/shops.module';
 import { AppRoutingModule } from './app.routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeModule } from './home/home.module';
 import { LoginModule } from './user/login/login.module';
 import { SignUpModule } from './user/sign-up/sign-up.module';
+import { AuthGuardLoginService } from "./user/services/auth-guard-login.service";
 
 
 @NgModule({
@@ -17,12 +17,13 @@ import { SignUpModule } from './user/sign-up/sign-up.module';
     BrowserModule,
     HttpClientModule,
     ShopsModule,
-    HomeModule,
     LoginModule,
     SignUpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    AuthGuardLoginService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

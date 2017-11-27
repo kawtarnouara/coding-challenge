@@ -4,6 +4,8 @@ import { Shop } from '../models/shop';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../../user/models/user';
 import { DislikedShop } from "../models/disliked-shop";
+import { UserService } from "../../user/services/user.service";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'list',
@@ -12,47 +14,28 @@ import { DislikedShop } from "../models/disliked-shop";
 
 export class ListShopComponent implements OnInit {
     shops: Shop[] = [];
-    latitude: string;
+    latitude;
     likedShop: Shop;
-    longitude: string;
+    longitude;
     disShops: Shop[] = [];
     dislikedShops: DislikedShop[] = [];
     currentUser: User = new User();
-    constructor(private _shopService: ShopService) {
+    constructor(private _shopService: ShopService , private _userService: UserService , private _router: Router) {
     }
+    setPosition(position){
+        console.log(position.coords);
+        this.latitude= position.coords.latitude;
+        this.longitude = position.coords.longitude;
+        this.currentUser.email = localStorage.getItem('user');
+        this.currentUser.id = localStorage.getItem('id');
+        this.getSortedShops(this.latitude, this.longitude, this.currentUser.id);
+        }
 
     ngOnInit() {
-        var startDate = new Date();
-        // Do your operations
-        var endDate   = new Date('2017-11-16T00:00:00');
-        var seconds = (-endDate.getTime() + startDate.getTime()) / 1000;
-        console.log(seconds);
-        console.log(Math.trunc(22.45));
-        this.currentUser.email = 'kawtar.nouara@gmail.com';
-        this.currentUser.id = '56e352ef-85e8-40ba-a804-fa5bae06069d';
-        this.currentUser.password = 'test';
-        this.currentUser.preferredShops = [];
-        this.currentUser.preferredShops.push({
-                'id': '5a0c6748fb3aac66aafe26de',
-                'picture': 'http://placehold.it/150x150',
-                'name': 'Teraprene',
-                'email': 'leilaware@teraprene.com',
-                'city': 'Rabat',
-                'location': {
-                    'type': 'Point',
-                    'coordinates': [
-                        -6.84167,
-                        33.81279
-                    ]
-                },
-                'distance': 0,
-        });
-        this._shopService.getCurrentIpLocation().subscribe(result => {
-            this.latitude = result.loc.split(',')[0];
-            this.longitude = result.loc.split(',')[1];
-            console.log(this.latitude + " " + this.longitude);
-            this.getSortedShops(this.latitude, this.longitude, this.currentUser.id);
-        });
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));
+            }
+       
     }
     getSortedShops(latitude, longitude, idUser) {
         this._shopService.getSortedShops(latitude, longitude, idUser)
@@ -98,4 +81,6 @@ export class ListShopComponent implements OnInit {
         date.setHours ( date.getHours() + 2 );
          this._shopService.addDislikedShop(this.currentUser, idShop, date.toISOString()).subscribe();
        }
+
+      
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { User } from '../../user/models/user';
 import { UserService } from "../services/user.service";
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'sign-up',
@@ -13,7 +14,7 @@ export class SignUpComponent {
     confirmPassword: string;
     password: string;
     existant = false;
-    constructor(private _userService: UserService) {
+    constructor(private _userService: UserService , private _router: Router) {
     }
 
     signUp($event, email, password) {
@@ -24,7 +25,11 @@ export class SignUpComponent {
             if (data === true) {
                 this.existant = true;
                 this.currentUser.password = btoa(password);
-                this._userService.addUser(this.currentUser).subscribe();
+                this._userService.addUser(this.currentUser).subscribe(user => {
+                    localStorage.setItem('user', user.email);
+                    localStorage.setItem('id', user.id);
+                    this._router.navigate(['shops']);
+                });
             }
     });
 }

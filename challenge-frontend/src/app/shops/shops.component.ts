@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { UserService } from "../user/services/user.service";
 
 @Component({
   template:  `
   <div class="header" id="home">
   <div class="container">
       <ul>
-          <li></li>
           <li>
               <i class="fa fa-shopping-cart" aria-hidden="true"></i> 
               <a href="/shops">Nearby shops</a>
@@ -15,8 +15,12 @@ import { Component } from '@angular/core';
                <a href="/shops/liked">Liked shops</a>
           </li>
           <li>
+          <i class="fa fa-user-circle-o" aria-hidden="true"></i>
+           {{user}}
+      </li>
+          <li>
           <i class="fa fa-sign-out" aria-hidden="true"></i>
-           <a href="/logout">Logout</a>
+           <a (click)="logout()">Logout</a>
       </li>
       </ul>
   </div>
@@ -24,4 +28,12 @@ import { Component } from '@angular/core';
     <router-outlet></router-outlet>
   `
 })
-export class ShopsComponent { }
+export class ShopsComponent { 
+    user: string;
+    constructor( private _userService: UserService) {
+        this.user= localStorage.getItem('user');
+    }
+logout() {
+    this._userService.logout();
+}
+}

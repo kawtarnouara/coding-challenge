@@ -9,6 +9,8 @@ import { ShopsRoutingModule } from './shops-routing.module';
 import { ShopsComponent } from './shops.component';
 import { ListShopModule } from './list-shops-component/list.module';
 import { LikedShopModule } from './liked-shops-component/liked.module';
+import { UserService } from "../user/services/user.service";
+import { AuthGuardService } from "../user/services/auth-guard.service";
 
 
 @NgModule({
@@ -25,7 +27,9 @@ import { LikedShopModule } from './liked-shops-component/liked.module';
         ShopsComponent,
     ],
     providers: [
-        ShopService
+        ShopService,
+        UserService,
+        AuthGuardService
     ]
 })
 

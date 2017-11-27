@@ -109,6 +109,27 @@ public class UserService implements IUserService {
 		this.update(user);
 		return dislikedShops;
 	}
+	
+	public boolean authenticate(User user) {
+		User realUser=this.findByEmail(user.getEmail());
+		if(realUser!=null) {
+			if( (realUser.getPassword().equals(user.getPassword() ) )
+					&& (realUser.getEmail().equals(user.getEmail() ) ) ){
+				realUser.setAutenticated(true);
+				this.update(realUser);
+				return true;
+			}
+		}
+		realUser.setAutenticated(false);
+		this.update(realUser);
+		return false;
+	}
+
+	public void logout(String email) {
+		User realUser=this.findByEmail(email);
+		realUser.setAutenticated(false);
+		this.update(realUser);
+	}
 	}
 
 	
