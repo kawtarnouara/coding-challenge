@@ -1,13 +1,13 @@
 This project uses :
 
-  • Backend : Spring Boot (Maven project)
-  • Frontend : Angular
-  • Database : MongoDB
+  • Backend : Spring Boot (Maven project) <br/>
+  • Frontend : Angular <br/>
+  • Database : MongoDB <br/>
 
- • To run the backend, import the project as an existing Maven project.
- • To run the frontend, use the commands :
-       • npm install
-       • ng serve --open
+ • To run the backend, import the project as an existing Maven project. <br/>
+ • To run the frontend, use the commands : <br/>
+       • npm install <br/>
+       • ng serve --open <br/>
 
 •	Once the user accesses the app, the login form is displayed.
 
