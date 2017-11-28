@@ -4,11 +4,13 @@ import { Observable } from 'rxjs/Observable';
 import { Shop } from '../models/shop';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { RequestOptions } from '@angular/http';
+import { Router } from "@angular/router";
+import 'rxjs/add/operator/catch';
 @Injectable()
 export class ShopService {
     apiUrl = 'http://localhost:8080/shops';
     userUrl = 'http://localhost:8080/users';
-    constructor(private _http: HttpClient) { }
+    constructor(private _http: HttpClient , private router: Router) { }
 
     // get all shops
     getShops(): Observable<any> {
@@ -16,7 +18,8 @@ export class ShopService {
     }
     // get one shop
     getShop(id_shop): Observable<any> {
-        return this._http.get(this.apiUrl + '/' + id_shop);
+        return this._http.get(this.apiUrl + '/' + id_shop) 
+        .catch((e: any) => Observable.throw(this.handleError(e)));
     }
 
     getSortedShops(latitude, longitude, idUser): Observable<any> {
@@ -55,6 +58,9 @@ export class ShopService {
     }
 
     private handleError(error: Response) {
+        if(error.status === 500 ||  error.status===503 || error.status===0) {
+            this.router.navigate(['/500']);
+        }
         console.error(error);
         return Observable.throw(error.json() || 'Server error');
     }
