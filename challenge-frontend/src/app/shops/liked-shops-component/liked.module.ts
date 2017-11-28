@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ShopService } from '../services/shop.service';
 import { LikedShopComponent } from './liked.component';
 import { HttpClientModule } from '@angular/common/http';
-import { UserService } from "../../user/services/user.service";
+import { UserService } from '../../user/services/user.service';
 @NgModule({
     declarations: [
         LikedShopComponent

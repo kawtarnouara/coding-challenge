@@ -1,6 +1,6 @@
 package com.coding.challenge.shop.model;
 
-
+// used to keep the deadline for a shop
 public class DislikedShop {
 	private Shop shop;
 	private String deadline;

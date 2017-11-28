@@ -4,10 +4,8 @@
                 <div class="col-3" *ngFor="let shop of shops ; let i = index">
 
                         <div class="border">
-                                <p>Shop {{shop.name}}</p>
-                                <p>Shop {{shop.id}}</p>
-                                
-                                <p>Distance {{shop.distance}} Km</p>
+                               <b> <p>Shop {{shop.name}}</p></b>
+                                <p>Distance : <span class="red">{{shop.distance}} Km</span></p>
                                 <img src={{shop.picture}}/>
                                 <br/>
                                 <div class="buttons">
@@ -20,3 +18,5 @@
                         </div>
                 </div>
         </div>
+        
+</div>

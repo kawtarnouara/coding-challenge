@@ -19,7 +19,6 @@ public class User  {
 	private String password;
 	private ArrayList<Shop> preferedShops;
 	private ArrayList<DislikedShop> dislikedShops;
-	private boolean autenticated;
 	
 	
 	public User( String email, String password) {
@@ -28,18 +27,6 @@ public class User  {
 		this.password = password;
 		this.preferedShops= new ArrayList<Shop>();
 		this.dislikedShops= new ArrayList<DislikedShop>();
-	}
-
-	
-	public User(String id, String email, String password, ArrayList<Shop> preferedShops,
-			ArrayList<DislikedShop> dislikedShops, boolean autenticated) {
-		super();
-		this.id = id;
-		this.email = email;
-		this.password = password;
-		this.preferedShops = preferedShops;
-		this.dislikedShops = dislikedShops;
-		this.autenticated = autenticated;
 	}
 
 
@@ -135,14 +122,6 @@ public class User  {
 	
 
 
-	public boolean isAutenticated() {
-		return autenticated;
-	}
-
-
-	public void setAutenticated(boolean autenticated) {
-		this.autenticated = autenticated;
-	}
 
 
 	@Override

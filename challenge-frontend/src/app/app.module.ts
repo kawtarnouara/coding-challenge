@@ -27,7 +27,7 @@ import { GlobalErrorHandler } from "./error-handler";
     NotFoundPageModule
   ],
   providers: [
-    AuthGuardLoginService,
+    AuthGuardLoginService, // to verify if the user is authenticated => redirect to shops
     {
       provide: ErrorHandler,
       useClass: GlobalErrorHandler

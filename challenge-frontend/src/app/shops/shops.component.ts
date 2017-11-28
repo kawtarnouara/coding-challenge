@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from "../user/services/user.service";
 
 @Component({
-  template:  `
+    template: `
   <div class="header" id="home">
   <div class="container">
       <ul>
@@ -20,7 +20,7 @@ import { UserService } from "../user/services/user.service";
       </li>
           <li>
           <i class="fa fa-sign-out" aria-hidden="true"></i>
-           <a (click)="logout()">Logout</a>
+           <a href='#' (click)="logout()">Logout</a>
       </li>
       </ul>
   </div>
@@ -28,12 +28,13 @@ import { UserService } from "../user/services/user.service";
     <router-outlet></router-outlet>
   `
 })
-export class ShopsComponent { 
+export class ShopsComponent {
     user: string;
-    constructor( private _userService: UserService) {
-        this.user= localStorage.getItem('user');
+    constructor(private _userService: UserService) {
+        // to displat the current user's email
+        this.user = localStorage.getItem('user');
     }
-logout() {
-    this._userService.logout();
-}
+    logout() {
+        this._userService.logout();
+    }
 }

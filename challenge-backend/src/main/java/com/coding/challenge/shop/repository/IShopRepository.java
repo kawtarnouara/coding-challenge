@@ -3,8 +3,6 @@ package com.coding.challenge.shop.repository;
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.repository.PagingAndSortingRepository;
-
 import com.coding.challenge.shop.model.Shop;
 
 public interface IShopRepository extends  MongoRepository<Shop, String>{

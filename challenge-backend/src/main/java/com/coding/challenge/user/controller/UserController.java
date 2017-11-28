@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coding.challenge.shop.model.DislikedShop;
-import com.coding.challenge.shop.model.Shop;
 import com.coding.challenge.user.model.User;
 import com.coding.challenge.user.service.UserService;
 
@@ -22,84 +21,78 @@ import com.coding.challenge.user.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-	
-	@RequestMapping(value = "/users" , method = RequestMethod.GET)
-	public ResponseEntity<List<User>> list() {
-		return ResponseEntity.ok(userService.findAll());
-	}
-	
+
+	// get a user by his id
 	@RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
 	public ResponseEntity<User> getUser(@PathVariable String id) {
-		User user=userService.findById(id);
+		User user = userService.findById(id);
+		if (user != null)
+			user.setPassword(null);
 		return ResponseEntity.ok(user);
 	}
-	
+
+	// create a user
 	@RequestMapping(value = "/users", method = RequestMethod.POST)
-	public  ResponseEntity<User> createUser(@RequestBody User user) {
-		return ResponseEntity.ok(userService.create(user));
+	public User createUser(@RequestBody User user) {
+		userService.create(user);
+		user.setPassword(null);
+		return user;
 	}
-	
+
+	// add a liked shop to a user
 	@RequestMapping(value = "/users/liked/{idShop}", method = RequestMethod.PUT)
-	public   User addLikedShop(@RequestBody User user,@PathVariable String idShop) {	
-		return userService.addPreferredShop(user,idShop);
-	}
-	
-	@RequestMapping(value = "/users/removeLiked/{idShop}", method = RequestMethod.PUT)
-	public   User removeLikedShop(@RequestBody User user,@PathVariable String idShop) {	
-		return userService.removeLikedShop(user,idShop);
-	}
-	
-	@RequestMapping(value = "/users/email", method = RequestMethod.GET)
-	public ResponseEntity<User> getUserByEmail (@RequestParam String email) {
-		return ResponseEntity.ok(userService.findByEmail(email));
-	}
-	
-	@RequestMapping(value = "/users/authenticate", method = RequestMethod.POST)
-	public  ResponseEntity<Boolean> authenticate (@RequestBody User user) {
-		return ResponseEntity.ok(userService.authenticate(user));
-	}
-	
-	@RequestMapping(value = "/users/logout", method = RequestMethod.PUT)
-	public  boolean logout (@RequestBody String email) {
-		userService.logout(email);
+	public boolean addLikedShop(@RequestBody User user, @PathVariable String idShop) {
+		userService.addPreferredShop(user, idShop);
 		return true;
 	}
-	
+
+	// remove a liked shop
+	@RequestMapping(value = "/users/removeLiked/{idShop}", method = RequestMethod.PUT)
+	public boolean removeLikedShop(@RequestBody User user, @PathVariable String idShop) {
+		userService.removeLikedShop(user, idShop);
+		return true;
+	}
+
+	// get a user by email
+	@RequestMapping(value = "/users/email", method = RequestMethod.GET)
+	public ResponseEntity<User> getUserByEmail(@RequestParam String email) {
+		User user = userService.findByEmail(email);
+		if (user != null)
+			user.setPassword(null);
+		return ResponseEntity.ok(user);
+	}
+
+	// verify if the password and email are correct
+	@RequestMapping(value = "/users/authenticate", method = RequestMethod.POST)
+	public ResponseEntity<Boolean> authenticate(@RequestBody User user) {
+		return ResponseEntity.ok(userService.authenticate(user));
+	}
+
+	// check if the email already exists
 	@RequestMapping(value = "/users/check", method = RequestMethod.GET)
-	public boolean checkUserByEmail (@RequestParam String email) {
-		if (userService.findByEmail(email)!=null)
+	public boolean checkUserByEmail(@RequestParam String email) {
+		if (userService.findByEmail(email) != null)
 			return false;
-		else 
+		else
 			return true;
 	}
-	
-	
-	
-	@RequestMapping(value = "/users/isAuthenticated", method = RequestMethod.GET)
-	public boolean checkIfAuthenticated (@RequestParam String email) {
-		if(email==null) return false;
-		User user = userService.findByEmail(email);
-		if (userService.findByEmail(email)!=null && user.isAutenticated() )
-			{System.out.println("here");
-			return true;}
-		else 
-			return false;
-	}
-	
+
 	@RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable String id) {
-			userService.delete(id);		
+		userService.delete(id);
 	}
-	
+
+	// add disliked shop
 	@RequestMapping(value = "/users/disliked/{idShop}", method = RequestMethod.PUT)
-	public   User addDisLikedShop(@RequestBody User user,@PathVariable String idShop, @RequestParam String deadline) {	
-		return userService.addDislikedShop(user,idShop,deadline);
+	public boolean addDisLikedShop(@RequestBody User user, @PathVariable String idShop, @RequestParam String deadline) {
+		userService.addDislikedShop(user, idShop, deadline);
+		return true;
 	}
-	
-	@RequestMapping(value = "/users/disliked/{idUser}" , method = RequestMethod.GET)
+
+	// get the disliked shops
+	@RequestMapping(value = "/users/disliked/{idUser}", method = RequestMethod.GET)
 	public ResponseEntity<List<DislikedShop>> dislikedShops(@PathVariable String idUser) {
 		return ResponseEntity.ok(userService.getDislikedShops(idUser));
 	}
-	
-	
+
 }

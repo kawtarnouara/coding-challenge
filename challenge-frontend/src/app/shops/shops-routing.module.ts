@@ -6,22 +6,23 @@ import { LikedShopComponent } from './liked-shops-component/liked.component';
 import { AuthGuardService as AuthGuard } from '../user/services/auth-guard.service';
 
 const shopsRoutes: Routes = [
-{
-    path: 'shops',
-    component: ShopsComponent,
-    children: [
-        { path: '', component: ListShopComponent , canActivate: [AuthGuard], },
-        { path: 'liked', component: LikedShopComponent , canActivate: [AuthGuard], },
-     ]
-}
+    {
+        path: 'shops',
+        component: ShopsComponent,
+        children: [
+            // used AuthGuard to check if the user is logged in
+            { path: '', component: ListShopComponent, canActivate: [AuthGuard], },
+            { path: 'liked', component: LikedShopComponent, canActivate: [AuthGuard], },
+        ]
+    }
 ];
 
 @NgModule({
-imports: [
-    RouterModule.forChild(shopsRoutes)
-],
-exports: [
-    RouterModule
-]
+    imports: [
+        RouterModule.forChild(shopsRoutes)
+    ],
+    exports: [
+        RouterModule
+    ]
 })
 export class ShopsRoutingModule { }

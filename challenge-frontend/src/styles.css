@@ -563,7 +563,9 @@ a.simpleCart_empty {
 .button-green{
 	background-color: #2FDAB8; color:white;margin-right:7px; padding-right:10px;
 }
-
+.red{
+	color:red;
+}
 .button{
 	color:black ;margin-right:7px; padding-right:10px;
 }
