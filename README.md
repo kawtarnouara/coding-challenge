@@ -1,4 +1,5 @@
 This project uses :
+
   • Backend : Spring Boot (Maven project)
   • Frontend : Angular
   • Database : MongoDB
