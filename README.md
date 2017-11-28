@@ -18,4 +18,12 @@
 
 • The user can dislike a shop, it gets removed from the nearby shops page for 2 hours.
 
+• If the user tries to access an non-existent page, a 404 page is displayed.
+
+![404](https://user-images.githubusercontent.com/20567102/33342983-c65b59e6-d47b-11e7-8cd3-68dea0ff0aca.png)
+
+• If a server error occurs, a 500 page is displayed.
+
+![500](https://user-images.githubusercontent.com/20567102/33343068-0057d566-d47c-11e7-8f6c-e51683b1a8a6.png)
+
 
